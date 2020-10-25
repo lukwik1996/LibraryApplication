@@ -1,0 +1,48 @@
+﻿@model CommonData.Models.User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<div>
+    <h6>
+        Welcome to our library system! To rent a book you have to create an account and log in.
+        You can view the list of available books, go through the details even before making the account to check if there's anything that will pick your interest.
+    </h6>
+</div>
+
+<h2>Login</h2>
+<h5 class="text-danger">@ViewBag.ErrorMsg</h5>
+
+@using (Html.BeginForm("Login", "Users", new { user = Model }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Login, new { @placeholder = "Card ID", required = true})
+            @Html.ValidationMessageFor(model => model.Login)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Card ID")
+        </div>
+
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password, new { @placeholder = "Password", required = true })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Password")
+        </div>
+
+        <p>
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("New user? Create a new account now!", "Register")
+</div>

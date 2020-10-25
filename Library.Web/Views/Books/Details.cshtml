@@ -1,0 +1,67 @@
+﻿@model CommonData.Models.Book
+
+@{
+    if (ViewBag.status == 0)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else if (ViewBag.status == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+    }
+    else if (ViewBag.status == 2)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<table class="minimalistBlack">
+    <tr>
+        <th class="table-dark">
+            @Html.Label("ISBN")
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Isbn)
+        </td>
+    </tr>
+    <tr>
+        <th class="table-dark">
+            @Html.Label("Title")
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Title)
+        </td>
+    </tr>
+    <tr>
+        <th class="table-dark">
+            @Html.Label("Author")
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Author)
+        </td>
+    </tr>
+    <tr>
+        <th class="table-dark">
+            @Html.Label("Genre")
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Genre)
+        </td>
+    </tr>
+    <tr>
+        <th class="table-dark">
+            @Html.Label("Release year")
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => Model.ReleaseYear)
+        </td>
+    </tr>
+</table>
+
+<div>
+    @Html.ActionLink("Back to list", "ListAvailable")
+</div>

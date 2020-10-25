@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+
+  mongodb:
+    image: mongo
+    ports:
+    - "27017:27017"
+
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  library.webapi:
+    image: ${DOCKER_REGISTRY-}librarywebapi
+    build:
+      context: .
+      dockerfile: Library.WebApi/Dockerfile
+    depends_on:
+      - rabbit
+      - mongodb
+
+
+  library.web:
+    image: ${DOCKER_REGISTRY-}libraryweb
+    build:
+      context: .
+      dockerfile: Library.Web/Dockerfile
+    depends_on:
+      - rabbit
+      - mongodb
+      - library.webapi
+

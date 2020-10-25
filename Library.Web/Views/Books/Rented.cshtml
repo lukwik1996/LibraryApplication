@@ -1,0 +1,60 @@
+﻿@model CommonData.Messages.Message<CommonData.Models.Book>
+
+@{
+    if (ViewBag.status == 0)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    if (ViewBag.status == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+    }
+    if (ViewBag.status == 2)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    ViewBag.Title = "Rented books";
+}
+
+<h3>List of rented books</h3>
+
+<table class="minimalistBlack">
+    <thead>
+    <tr>
+        <th>
+            @Html.Label("Title")
+        </th>
+        <th>
+            @Html.Label("Author")
+        </th>
+        <th>
+            @Html.Label("Genre")
+        </th>
+        <th>
+            @Html.Label("Action")
+        </th>
+    </tr>
+    </thead>
+    
+    @if (Model.MessageContent != null)
+    {
+        @foreach (var book in Model.MessageContent)
+        {
+            <tr>
+                <td>
+                    @book.Title
+                </td>
+                <td>
+                    @book.Author
+                </td>
+                <td>
+                    @book.Genre
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "DetailsRented", new { id = book.Id })
+                    @Html.ActionLink("Return", "Return", new { id = book.Id })
+                </td>
+            </tr>
+        }
+    }
+</table>

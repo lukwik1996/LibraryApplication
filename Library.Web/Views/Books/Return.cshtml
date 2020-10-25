@@ -1,0 +1,37 @@
+﻿@model CommonData.Models.Book
+
+@{
+    if (ViewBag.status == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+    }
+    if (ViewBag.status == 2)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    ViewBag.Title = "Rent";
+}
+
+<h2>Rent a book</h2>
+
+<div>
+    <h6>
+        You've selected <b> @Model.Title </b> by <b> @Model.Author </b>.
+        Are you sure you want to return it?
+    </h6>
+        
+    @using (Html.BeginForm("ReturnBook", "Books", new {id = Model.Id}, FormMethod.Post))
+    {
+        <fieldset>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <p>
+                <input type="submit" value="Return" class="btn btn-primary" />
+            </p>
+        </fieldset>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to list", "Rented", "Books", new {id = ViewBag.userID})
+</div>

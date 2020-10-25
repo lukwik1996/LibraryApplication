@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+        <UserSecretsId>c3cf18c9-5512-489d-acc0-9f10d218ab66</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit" Version="5.5.5" />
+        <PackageReference Include="MassTransit.AspNetCore">
+          <Version>5.5.5</Version>
+        </PackageReference>
+        <PackageReference Include="MassTransit.RabbitMQ">
+          <Version>5.5.5</Version>
+        </PackageReference>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
+        <PackageReference Include="MongoDB.Driver" Version="2.9.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CommonData\CommonData.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,104 @@
+﻿@model CommonData.Messages.Message<CommonData.Models.Book>
+
+@{
+    if (ViewBag.status == 0)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    if (ViewBag.status == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+    }
+    if (ViewBag.status == 2)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    ViewBag.Title = "Available books";
+}
+
+<h3>List of all books available to rent</h3>
+<br/>
+<h5>@ViewBag.ErrorMsg</h5>
+
+<table class="minimalistBlack">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("ISBN")
+            </th>
+            <th>
+                @Html.Label("Title")
+            </th>
+            <th>
+                @Html.Label("Author")
+            </th>
+            <th>
+                @Html.Label("Genre")
+            </th>
+            <th>
+                @Html.Label("Action")
+            </th>
+        </tr>
+    </thead>
+
+    @if (Model.MessageContent != null)
+    {
+        @foreach (var book in Model.MessageContent)
+        {
+            <tr>
+                <td>
+                    @book.Isbn
+                </td>
+                <td>
+                    @book.Title
+                </td>
+                <td>
+                    @book.Author
+                </td>
+                <td>
+                    @book.Genre
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = book.Id })
+
+                    @{
+                        if (!ViewBag.userID.Equals(""))
+                        {
+                            @Html.ActionLink("Rent", "Rent", new { id = book.Id });
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    }
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Isbn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+
+                @{
+                    if (!ViewBag.userID.Equals(""))
+                    {
+                        @Html.ActionLink("Rent", "Rent", new { id = item.Id });
+                    }
+                }
+            </td>
+        </tr>
+    }*@
+
+</table>

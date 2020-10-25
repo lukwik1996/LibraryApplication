@@ -1,0 +1,5 @@
+
+obj/Docker/CachedComposeConfigFilePaths.cache
+obj/Docker/docker-compose.vs.debug.partial.g.yml
+obj/Docker/docker-compose.vs.release.partial.g.yml
+obj/Docker/MergedDockerCompose.cache

@@ -1,0 +1,96 @@
+﻿@model CommonData.Models.UserUpdate
+
+@{
+    if (ViewBag.status == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+    }
+    if (ViewBag.status == 2)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    ViewData["Title"] = "UserUpdate";
+}
+
+<h2>Update your credentials</h2>
+<br />
+<br />
+<h5 class="text-danger">@ViewBag.ErrorMsg</h5>
+
+@using (Html.BeginForm("UpdatePassword", "Users", new { Model }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <h4>Change password</h4>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.OldPassword, new { @placeholder = "Old password" })
+            @Html.ValidationMessageFor(model => model.OldPassword)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Current password");
+        </div>
+
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.NewPassword, new { @placeholder = "New password" })
+            @Html.ValidationMessageFor(model => model.NewPassword)
+        </div>
+        <div class="editor-label">
+            @Html.Label("New password (must be at least 8 characters long)");
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.RepeatNewPassword, new { @placeholder = "Repeat new password" })
+            @Html.ValidationMessageFor(model => model.RepeatNewPassword)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Repeat new password");
+        </div>
+
+        <p>
+            <input type="submit" value="Change password" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+
+<br />
+
+@using (Html.BeginForm("UpdateEmail", "Users", new { Model }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <h4>Change email address</h4>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.OldEmail, new { @disabled = true })
+            @Html.ValidationMessageFor(model => model.OldEmail)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Current email address");
+        </div>
+
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.OldPasswordEmail, new { @placeholder = "Password" })
+            @Html.ValidationMessageFor(model => model.OldPasswordEmail)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Password");
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.NewEmail, new { @placeholder = "New email" })
+            @Html.ValidationMessageFor(model => model.NewEmail)
+        </div>
+        <div class="editor-label">
+            @Html.Label("New email address");
+        </div>
+
+        <p>
+            <input type="submit" value="Change email" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to rented books list", "Rented", "Books")
+</div>

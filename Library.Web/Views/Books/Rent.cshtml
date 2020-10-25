@@ -1,0 +1,40 @@
+﻿@model CommonData.Models.Book
+
+@{
+    if (ViewBag.status == 1)
+    {
+        Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+    }
+    if (ViewBag.status == 2)
+    {
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+    ViewBag.Title = "Rent";
+}
+
+<h2>Rent a book</h2>
+
+<div>
+    <h6>
+        You've selected <b> @Model.Title </b> by <b> @Model.Author </b>.
+        Are you sure you want to rent it?
+    </h6>
+        
+    @using (Html.BeginForm("Rent", "Books", new { id = Model.Id, book = Model }, FormMethod.Post))
+    {
+        <fieldset>
+            @Html.AntiForgeryToken()
+            @{
+                Library.Web.Program.Send("libraryMails", ViewBag.Email + "," + ViewBag.fullName);
+            }
+            @Html.ValidationSummary(true)
+            <p>
+                <input type="submit" value="Rent" class="btn btn-primary" />
+            </p>
+        </fieldset>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to list", "ListAvailable")
+</div>

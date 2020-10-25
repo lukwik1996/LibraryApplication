@@ -1,0 +1,58 @@
+﻿@model CommonData.Models.User
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Register";
+}
+
+<h2>Create a new account</h2>
+<h5 class="text-danger">@ViewBag.ErrorMsg</h5>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email address", required = true})
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Email address")
+        </div>
+
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Login, new { @placeholder = "Card ID", required = true })
+            @Html.ValidationMessageFor(model => model.Login)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Card ID")
+        </div>
+
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password, new { @placeholder = "Password", required = true })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Password (must be at least 8 characters long)")
+        </div>
+
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.FullName, new { @placeholder = "Full name", required = true })
+            @Html.ValidationMessageFor(model => model.FullName)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Full name")
+        </div>
+
+        <p>
+            <input type="submit" value="Register" class="btn btn-primary" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Login", "Login")
+</div>
+

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CommonData.Models.Book>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "ListBooks";
+}
+
+<h2>List of all available books</h2>
+
+<p>
+    @Html.ActionLink("Add a new book", "Add")
+</p>
+<table class="minimalistBlack">
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("ISBN")
+            </th>
+            <th>
+                @Html.Label("Title")
+            </th>
+            <th>
+                @Html.Label("Author")
+            </th>
+            <th>
+                @Html.Label("Genre")
+            </th>
+            <th>
+                @Html.Label("Release year")
+            </th>
+            <th>
+                @Html.Label("Renter") <!--TODO polaczyc z uzytkownikami? (wyswietlac id karty lub imie i nazwisko)-->
+            </th>
+            <th>
+                @Html.Label("Rent date")
+            </th>
+            <th>
+                @Html.Label("Return date")
+            </th>
+            <th>
+                @Html.Label("Action")
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Isbn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Renter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Remove", "Remove", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
